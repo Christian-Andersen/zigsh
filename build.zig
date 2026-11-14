@@ -13,7 +13,7 @@ pub fn build(b: *std.Build) void {
 
     // 2. Define the executable artifact
     const exe = b.addExecutable(.{
-        .name = "my_project",
+        .name = "zigtils",
         .root_module = exe_mod,
     });
 
@@ -24,7 +24,7 @@ pub fn build(b: *std.Build) void {
 
     // Create a parallel check artifact using the same module
     const check_exe = b.addExecutable(.{
-        .name = "my_project",
+        .name = "zigtils",
         .root_module = exe_mod,
     });
     check_step.dependOn(&check_exe.step);
