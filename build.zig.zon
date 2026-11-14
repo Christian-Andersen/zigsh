@@ -1,0 +1,7 @@
+.{
+    .name = .zigtils,
+    .version = "0.0.1",
+    .minimum_zig_version = "0.17.1",
+    .paths = .{""},
+    .fingerprint = 0x7282669df4c66f4e,
+}
