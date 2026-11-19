@@ -1,20 +1,19 @@
 const std = @import("std");
 
-const cat = @import("cat.zig").cat;
-const mkdir = @import("mkdir.zig").mkdir;
-
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
-    const allocator = init.arena.allocator();
-    const args = (try init.minimal.args.toSlice(allocator))[1..];
-    if (args.len == 0) {
-        @panic("Plase pass arguments!");
-    }
-    if (std.mem.eql(u8, args[0], "cat")) {
-        try cat(args[1..], io);
-    } else if (std.mem.eql(u8, args[0], "mkdir")) {
-        try mkdir(args[1..], io);
-    } else {
-        @panic("Not implemented");
+    var stdout_buffer: [4096]u8 = undefined;
+    var stdout_writer = std.Io.File.stdout().writer(io, &stdout_buffer);
+    const stdout = &stdout_writer.interface;
+    var stdin_buffer: [1024]u8 = undefined;
+    var stdin_reader = std.Io.File.stdin().reader(io, &stdin_buffer);
+    const stdin = &stdin_reader.interface;
+
+    while (true) {
+        try stdout.print("> ", .{});
+        try stdout.flush();
+        const line = (try stdin.takeDelimiter('\n')) orelse break;
+        try stdout.print("{s}\n", .{line});
+        try stdout.flush();
     }
 }

@@ -11,12 +11,8 @@ fn catFile(file: std.Io.File, io: std.Io) !void {
     }
 }
 
-pub fn cat(args: []const [:0]const u8, io: std.Io) !void {
-    if (args.len == 0) {
-        try catFile(std.Io.File.stdin(), io);
-        return;
-    }
-    for (args) |arg| {
+pub fn cat(args: *std.mem.TokenIterator(u8, .scalar), io: std.Io) !void {
+    while (args.next()) |arg| {
         const file = try std.Io.Dir.cwd().openFile(io, arg, .{ .mode = .read_only });
         try catFile(file, io);
     }
