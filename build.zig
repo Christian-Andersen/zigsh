@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) void {
     });
 
     const exe = b.addExecutable(.{
-        .name = "zli",
+        .name = "zigsh",
         .root_module = exe_mod,
     });
 
@@ -20,7 +20,7 @@ pub fn build(b: *std.Build) void {
     const check_step = b.step("check", "Check the project for compilation errors");
 
     const check_exe = b.addExecutable(.{
-        .name = "zli",
+        .name = "zigsh",
         .root_module = exe_mod,
     });
     check_step.dependOn(&check_exe.step);

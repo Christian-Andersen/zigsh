@@ -1,7 +1,7 @@
 .{
-    .name = .zli,
+    .name = .zigsh,
     .version = "0.0.1",
     .minimum_zig_version = "0.17.1",
     .paths = .{""},
-    .fingerprint = 0x5b01c9c398cdf42e,
+    .fingerprint = 0x398da90083d70218,
 }
